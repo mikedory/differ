@@ -12,3 +12,4 @@ Requirements
 - Celery
 - Requests
 - Beautiful Soup
+- Supervisor
