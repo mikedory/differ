@@ -13,3 +13,5 @@ Requirements
 - Requests
 - Beautiful Soup
 - Supervisor
+
+You'll need a place to host this, a Mandrill account, and a webpage (or any HTML document) that you want to monitor.
