@@ -15,3 +15,21 @@ Requirements
 - Supervisor
 
 You'll need a place to host this, a Mandrill account, and a webpage (or any HTML document) that you want to monitor.
+
+
+TODO
+----
+
+Err, make this work.
+
+
+Changelog
+---------
+
+First release! Woot!
+
+
+License
+-------
+
+Basically, totally open.  Go to town.
