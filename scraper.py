@@ -24,12 +24,11 @@ import local_settings
 # this is the primary bit
 def fetch_site(
         target_url,
-        target_element_type=None,
-        target_element_name=None
+        target_element_name='html'
     ):
     """
-    Fetches the content of the requested site, based on element types 
-    and names (both of which are optional). 
+    Fetches the content of the requested site, based on element types. It uses
+    CSS selectors (jQuery-style), and defaults to `html` if not otherwise set. 
     
     """
 
@@ -37,8 +36,8 @@ def fetch_site(
     r = requests.get(target_url)
     soup = BeautifulSoup(r.text)
 
-    # find all the divs matching the requested 
-    target_content = soup.find(target_element_type, target_element_name)
+    # find all the divs matching the requested selectors
+    target_content = soup.select(target_element_name)
 
     return target_content
 
@@ -61,7 +60,6 @@ def compare_cached():
 
 if __name__ == "__main__":
     target_url = local_settings.TARGET_URL
-    target_element_type = local_settings.TARGET_ELEMENT_TYPE
     target_element_name = local_settings.TARGET_ELEMENT_NAME
 
-    print fetch_site(target_url, target_element_type, target_element_name)
+    print fetch_site(target_url, target_element_name)
