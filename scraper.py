@@ -57,6 +57,7 @@ class Scraper:
         """
         # snag the page content
         try:
+            # attempt to request and parse the target content
             r = requests.get(target_url)
             soup = BeautifulSoup(r.text)
 
