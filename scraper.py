@@ -156,6 +156,8 @@ if __name__ == "__main__":
             print diff
         else:
             print 'The target and cache match.'
+    else:
+        print 'Unable to fetch requested page! D:'
 
     # print(scraper.update_cache(target_content))
     # print(scraper.update_cache('hi!'))
