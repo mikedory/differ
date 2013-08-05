@@ -22,7 +22,7 @@ Usage
 
 Celery
 
-    celery -A offline.tasks worker --config=offline.celeryconfig
+    celery -A offline.tasks worker --config=offline.celeryconfig --loglevel=info
 
 
 TODO
