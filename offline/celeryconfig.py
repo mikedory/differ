@@ -1,5 +1,7 @@
 # from datetime import timedelta
 
+import local_settings
+
 """ 
 set up the backend defaults for the results and broker
 
@@ -9,21 +11,12 @@ TODO:   move this stuff into local_settings
 
 """
 
-CELERY_RESULT_BACKEND = "redis"
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
-REDIS_DB = 0
-
-backend = 'redis'
-host = 'localhost'
-port = 6379
-db = 0
-
-BROKER_URL = '%s://%s:%d/%d' % (backend, host, port, db)
-# BROKER_BACKEND = "redis"
-# BROKER_HOST = "localhost"  # Maps to redis host.
-# BROKER_PORT = 6379         # Maps to redis port.
-# BROKER_VHOST = "0"         # Maps to database number.
+BROKER_URL = '%s://%s:%d/%d' % (
+    local_settings.BROKER_BACKEND,
+    local_settings.BROKER_HOST,
+    local_settings.BROKER_PORT,
+    local_settings.BROKER_DB
+)
 
 # CELERY_IMPORTS = ("module.submodule.foo", ) # Module which contains the tasks you want to call asynchronously
 
