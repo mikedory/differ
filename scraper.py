@@ -16,6 +16,8 @@
 
 # import the usual stuff
 import time
+import difflib
+import sys
 from datetime import datetime
 
 # import our favorite libraries
@@ -76,32 +78,45 @@ class Scraper:
         Fetches the latest entry from the Redis cache
 
         """
-        cached_content = self.db.hgetall('target_page_cache')
+
+        # greab the last-saved content out of the cache
+        # cached_content = self.db.hgetall('target_page_cache')
+        cached_content = [self.db.hget('target_page_cache', 'page_content')]
 
         return cached_content
 
 
-    def diff_cache(self):
+    def diff_cache(self, target_content, cached_content):
         """
-        Compare against the last cached version
+        Compare the newly-grabbed page content against the last cached version.
 
         """
-        pass
+        if cached_content is not None:
+            print type(target_content)
+            print '***'
+            print type(cached_content)
+            
+            diff = difflib.unified_diff(unicode(str(target_content), errors='ignore'), unicode(str(cached_content), errors='ignore'))
+            for line in diff:
+                sys.stdout.write(line)
+            # sys.stdout.writelines(diff)
+        else:
+            diff = None
+
+        return diff
 
 
-    def update_cache(self, db, target_content):
+    def update_cache(self, target_content):
         """
-
+        Update the page content stored in the cache.
 
         """
         unix_timestamp = int(time.mktime(datetime.now().timetuple()))
-
         cache_dict = {
-            "cache_content": target_content,
+            "page_content": target_content,
             "timestamp": unix_timestamp
         }
-
-        cache_update = db.hmset('target_page_cache', cache_dict) 
+        cache_update = self.db.hmset('target_page_cache', cache_dict) 
 
         return cache_update
 
@@ -122,8 +137,14 @@ if __name__ == "__main__":
     target_url = local_settings.TARGET_URL
     target_element_name = local_settings.TARGET_ELEMENT_NAME
 
-    page_content = scraper.fetch_site_content(target_url, target_element_name)
+    target_content = scraper.fetch_site_content(target_url, target_element_name)
+    cached_content = scraper.fetch_cache()
 
+    print target_content, cached_content
+
+    # print(scraper.diff_cache(target_content, cached_content))
+
+    print(scraper.update_cache(target_content))
 
     # scraper.fetch_cache(db)
     # print scraper.update_cache(db)
