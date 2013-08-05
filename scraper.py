@@ -69,7 +69,7 @@ class Scraper:
 
         # find all the divs matching the requested selectors
         target_html = soup.select(target_element_name)
-        target_content = target_html[0].prettify().encode('UTF-8')
+        target_content = target_html[0].prettify(formatter="html")
 
         # target_content = "".join(line.strip() for line in str(target_html).split("\n"))
 
@@ -95,20 +95,17 @@ class Scraper:
 
         """
         if cached_content is not None:
-            print type(target_content)
-            print '***'
-            print type(cached_content)
-
             diff = difflib.unified_diff(
-                        unicode(str(target_content), errors='ignore'),
-                        unicode(str(cached_content), errors='ignore'))
+                cached_content.splitlines(1),
+                target_content.splitlines(1)
+            )
+            diff_string = ""
             for line in diff:
-                sys.stdout.write(line)
-            # sys.stdout.writelines(diff)
+                diff_string += line
         else:
-            diff = None
+            diff_string = None
 
-        return diff
+        return diff_string
 
 
     def update_cache(self, target_content):
@@ -145,13 +142,18 @@ if __name__ == "__main__":
     target_content = scraper.fetch_site_content(target_url, target_element_name)
     cached_content = scraper.fetch_cache()
 
-    print target_content
-    print cached_content
+    # print target_content
+    # print cached_content
 
-    print(scraper.diff_cache(target_content, cached_content))
+    diff = scraper.diff_cache(target_content, cached_content)
+    if diff is not "":
+        print 'There are some differences:'
+        print diff
+    else:
+        print 'The target and cache match.'
 
     # print(scraper.update_cache(target_content))
-    print(scraper.update_cache('hi!'))
+    # print(scraper.update_cache('hi!'))
 
     # scraper.fetch_cache(db)
     # print scraper.update_cache(db)
