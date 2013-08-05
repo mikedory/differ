@@ -18,6 +18,8 @@ class Scraper:
     Provides methods for scraping target pages and comparing their content
     against cached, earlier versions.
 
+    TODO:   rename this class. and this file, probably.
+
     """
 
     def __init__(self):
@@ -25,15 +27,20 @@ class Scraper:
         Initalize all our lovely constants and stuff, and create a 
         db connection object for later use.
 
+        TODO:   move all this stuff to elsewhere: we don't want to need
+                the local_settings files just to load this module
+
         """
+        # set the search parameter constants
         self.target_url = local_settings.TARGET_URL
         self.target_element_name = local_settings.TARGET_ELEMENT_NAME
 
+        # set the redis constants
         self.redis_host = local_settings.REDIS_HOST
         self.redis_port = local_settings.REDIS_PORT
         self.redis_db = local_settings.REDIS_DB
 
-        # get your connection to Redis set
+        # create the Redis connection object
         self.db = self.get_redis_conn(
             self.redis_host,
             self.redis_port,
@@ -41,7 +48,7 @@ class Scraper:
         )
 
 
-    # this is the primary bit
+    # fetch the page content
     def fetch_site_content(self, target_url, target_element_name='html'):
         """
         Fetches the content of the requested site, based on element types.
@@ -61,6 +68,7 @@ class Scraper:
         return target_content
 
 
+    # grab the cached stuff out of Redis
     def fetch_cache(self):
         """
         Fetches the latest entry from the Redis cache
@@ -78,11 +86,17 @@ class Scraper:
         Compare the newly-grabbed page content against the last cached version.
 
         """
+        # if the cached content isn't empty (it can't compare against None)
         if cached_content is not None:
+            # do a unified diff against the two sources
             diff = difflib.unified_diff(
+                # splitlines is required, or else the output is a total mess
                 cached_content.splitlines(1),
                 target_content.splitlines(1)
             )
+
+            # the output is a generator, so let's step through it to make
+            # a string we can use later 
             diff_string = ""
             for line in diff:
                 diff_string += line
@@ -112,7 +126,9 @@ class Scraper:
         Gets a connection to Redis, and returns the connection object.
 
         """
-        return redis.Redis(host=redis_host, port=redis_port, db=redis_db)
+        redis_conn = redis.Redis(host=redis_host, port=redis_port, db=redis_db)
+
+        return redis_conn
 
 
 
