@@ -71,8 +71,6 @@ class Scraper:
         target_html = soup.select(target_element_name)
         target_content = target_html[0].prettify(formatter="html")
 
-        # target_content = "".join(line.strip() for line in str(target_html).split("\n"))
-
         return target_content
 
 
@@ -83,7 +81,6 @@ class Scraper:
         """
 
         # greab the last-saved content out of the cache
-        # cached_content = self.db.hgetall('target_page_cache')
         cached_content = self.db.hget('target_page_cache', 'page_content')
 
         return cached_content
@@ -154,6 +151,3 @@ if __name__ == "__main__":
 
     # print(scraper.update_cache(target_content))
     # print(scraper.update_cache('hi!'))
-
-    # scraper.fetch_cache(db)
-    # print scraper.update_cache(db)
