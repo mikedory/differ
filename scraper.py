@@ -48,7 +48,6 @@ class Scraper:
         )
 
 
-    # fetch the page content
     def fetch_site_content(self, target_url, target_element_name='html'):
         """
         Fetches the content of the requested site, based on element types.
@@ -72,7 +71,6 @@ class Scraper:
         return target_content
 
 
-    # grab the cached stuff out of Redis
     def fetch_cache(self):
         """
         Fetches the latest entry from the Redis cache
@@ -135,7 +133,7 @@ class Scraper:
         return redis_conn
 
 
-
+# if we're here to run, run it
 if __name__ == "__main__":
 
     scraper = Scraper()
