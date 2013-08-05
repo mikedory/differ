@@ -1,7 +1,6 @@
 # import the usual stuff
 import time
 import difflib
-import sys
 from datetime import datetime
 
 # import our favorite libraries
@@ -13,8 +12,11 @@ from bs4 import BeautifulSoup
 import local_settings
 
 
+# the scraper class. the brains of the organization, really.
 class Scraper:
     """
+    Provides methods for scraping target pages and comparing their content
+    against cached, earlier versions.
 
     """
 
