@@ -105,8 +105,10 @@ class Scraper:
 if __name__ == "__main__":
 
     scraper = Scraper()
+
     target_url = local_settings.TARGET_URL
     target_element_name = local_settings.TARGET_ELEMENT_NAME
+
     print scraper.fetch_site_content(target_url, target_element_name)
 
     # scraper.fetch_cache(db)
