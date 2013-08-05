@@ -56,14 +56,18 @@ class Scraper:
         if not otherwise explicitly set. 
         
         """
-
         # snag the page content
-        r = requests.get(target_url)
-        soup = BeautifulSoup(r.text)
+        try:
+            r = requests.get(target_url)
+            soup = BeautifulSoup(r.text)
 
-        # find all the divs matching the requested selectors
-        target_html = soup.select(target_element_name)
-        target_content = target_html[0].prettify(formatter="html")
+            # find all the divs matching the requested selectors
+            target_html = soup.select(target_element_name)
+            target_content = target_html[0].prettify(formatter="html")
+
+        # if the request fails, return None
+        except requests.exceptions.ConnectionError:
+            target_content = None
 
         return target_content
 
@@ -145,12 +149,13 @@ if __name__ == "__main__":
     # print target_content
     # print cached_content
 
-    diff = scraper.diff_cache(target_content, cached_content)
-    if diff is not "":
-        print 'There are some differences:'
-        print diff
-    else:
-        print 'The target and cache match.'
+    if target_content is not None:
+        diff = scraper.diff_cache(target_content, cached_content)
+        if diff is not "":
+            print 'There are some differences:'
+            print diff
+        else:
+            print 'The target and cache match.'
 
     # print(scraper.update_cache(target_content))
     # print(scraper.update_cache('hi!'))
