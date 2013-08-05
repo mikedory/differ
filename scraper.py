@@ -44,8 +44,9 @@ class Scraper:
     # this is the primary bit
     def fetch_site_content(self, target_url, target_element_name='html'):
         """
-        Fetches the content of the requested site, based on element types. It uses
-        CSS selectors (jQuery-style), and defaults to `html` if not otherwise set. 
+        Fetches the content of the requested site, based on element types.
+        It uses CSS selectors (jQuery-style), and defaults to `html`
+        if not otherwise explicitly set. 
         
         """
 
