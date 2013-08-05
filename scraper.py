@@ -28,17 +28,28 @@ import local_settings
 
 
 class Scraper:
+    """
+
+    """
 
     def __init__(self):
-        # self.target_url = local_settings.TARGET_URL
-        # self.target_element_name = local_settings.TARGET_ELEMENT_NAME
+        """
+        Initalize all our lovely constants and stuff, and create a 
+        db connection object for later use.
+
+        """
+        self.target_url = local_settings.TARGET_URL
+        self.target_element_name = local_settings.TARGET_ELEMENT_NAME
 
         self.redis_host = local_settings.REDIS_HOST
         self.redis_port = local_settings.REDIS_PORT
         self.redis_db = local_settings.REDIS_DB
 
+        # get your connection to Redis set
         self.db = self.get_redis_conn(
-            self.redis_host, self.redis_port, self.redis_db
+            self.redis_host,
+            self.redis_port,
+            self.redis_db
         )
 
 
@@ -65,7 +76,9 @@ class Scraper:
         Fetches the latest entry from the Redis cache
 
         """
-        self.db.hgetall('target_page_cache')
+        cached_content = self.db.hgetall('target_page_cache')
+
+        return cached_content
 
 
     def diff_cache(self):
@@ -109,7 +122,8 @@ if __name__ == "__main__":
     target_url = local_settings.TARGET_URL
     target_element_name = local_settings.TARGET_ELEMENT_NAME
 
-    print scraper.fetch_site_content(target_url, target_element_name)
+    page_content = scraper.fetch_site_content(target_url, target_element_name)
+
 
     # scraper.fetch_cache(db)
     # print scraper.update_cache(db)
