@@ -13,12 +13,18 @@ CELERY_RESULT_BACKEND = "redis"
 REDIS_HOST = "localhost"
 REDIS_PORT = 6379
 REDIS_DB = 0
- 
-BROKER_BACKEND = "redis"
-BROKER_HOST = "localhost"  # Maps to redis host.
-BROKER_PORT = 6379         # Maps to redis port.
-BROKER_VHOST = "0"         # Maps to database number.
- 
+
+backend = 'redis'
+host = 'localhost'
+port = 6379
+db = 0
+
+BROKER_URL = '%s://%s:%d/%d' % (backend, host, port, db)
+# BROKER_BACKEND = "redis"
+# BROKER_HOST = "localhost"  # Maps to redis host.
+# BROKER_PORT = 6379         # Maps to redis port.
+# BROKER_VHOST = "0"         # Maps to database number.
+
 # CELERY_IMPORTS = ("module.submodule.foo", ) # Module which contains the tasks you want to call asynchronously
 
 
