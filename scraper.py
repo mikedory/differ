@@ -68,7 +68,10 @@ class Scraper:
         soup = BeautifulSoup(r.text)
 
         # find all the divs matching the requested selectors
-        target_content = soup.select(target_element_name)
+        target_html = soup.select(target_element_name)
+        target_content = target_html[0].prettify().encode('UTF-8')
+
+        # target_content = "".join(line.strip() for line in str(target_html).split("\n"))
 
         return target_content
 
@@ -81,7 +84,7 @@ class Scraper:
 
         # greab the last-saved content out of the cache
         # cached_content = self.db.hgetall('target_page_cache')
-        cached_content = [self.db.hget('target_page_cache', 'page_content')]
+        cached_content = self.db.hget('target_page_cache', 'page_content')
 
         return cached_content
 
@@ -95,8 +98,10 @@ class Scraper:
             print type(target_content)
             print '***'
             print type(cached_content)
-            
-            diff = difflib.unified_diff(unicode(str(target_content), errors='ignore'), unicode(str(cached_content), errors='ignore'))
+
+            diff = difflib.unified_diff(
+                        unicode(str(target_content), errors='ignore'),
+                        unicode(str(cached_content), errors='ignore'))
             for line in diff:
                 sys.stdout.write(line)
             # sys.stdout.writelines(diff)
@@ -140,11 +145,13 @@ if __name__ == "__main__":
     target_content = scraper.fetch_site_content(target_url, target_element_name)
     cached_content = scraper.fetch_cache()
 
-    print target_content, cached_content
+    print target_content
+    print cached_content
 
-    # print(scraper.diff_cache(target_content, cached_content))
+    print(scraper.diff_cache(target_content, cached_content))
 
-    print(scraper.update_cache(target_content))
+    # print(scraper.update_cache(target_content))
+    print(scraper.update_cache('hi!'))
 
     # scraper.fetch_cache(db)
     # print scraper.update_cache(db)
