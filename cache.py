@@ -4,7 +4,6 @@ import difflib
 from datetime import datetime
 
 # import our local stuffs
-import local_settings
 import database
 
 
@@ -21,14 +20,7 @@ class Cache:
         Initalize all our lovely constants and stuff, and create a 
         db connection object for later use.
 
-        TODO:   move all this stuff to elsewhere: we don't want to need
-                the local_settings files just to load this module
-
         """
-        # set the redis constants
-        self.redis_host = local_settings.REDIS_HOST
-        self.redis_port = local_settings.REDIS_PORT
-        self.redis_db = local_settings.REDIS_DB
 
         # create the Redis connection object
         db = database.Database()
