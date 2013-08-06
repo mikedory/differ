@@ -20,6 +20,13 @@ You'll need a place to host this, a Mandrill account, and a webpage (or any HTML
 Usage
 -----
 
+You can run this app in one of two ways: as a stand-alone command (handy to do manual site diffs or join up with a Cron task or Herou's Scheduler), or as a running process via Celery.
+
+### Stand-alone
+
+
+
+
 ### Celery
 
 #### Worker/Beat
