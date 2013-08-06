@@ -21,3 +21,6 @@ venv
 .env
 local_settings.py
 
+# celery's scheduler file
+celerybeat-schedule.db
+
