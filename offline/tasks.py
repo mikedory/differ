@@ -31,21 +31,17 @@ def scrape(target_url, target_element_name):
     # check the cache and report our findings
     if target_content is not None:
         diff = cache.diff_cache(target_content, cached_content)
-        message = ""
         if diff is not "":
             logging.info('The target differs from the cache.')
             logging.info(diff)
-            message = diff
 
             logging.info('Updating cache...')
             scraper.update_cache(target_content)
             logging.info('Cache updated.')
         else:
             logging.info('The target and cache match. Not altering cache.')
-            message = None
     else:
         logging.warn('Unable to fetch requested page! D:')
         logging.error('Scraping falure.')
-        message = None
 
-    return message
+    return 'Scraping complete.'
