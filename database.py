@@ -4,6 +4,8 @@ import redis
 # import our local stuffs
 import local_settings
 
+
+# ye olde database classe
 class Database:
     def __init__(self):
         """
@@ -11,7 +13,7 @@ class Database:
         db connection object for later use.
 
         TODO:   move all this stuff to elsewhere: we don't want to need
-                the local_settings files just to load this module
+                the local_settings files just to load this module, maybe?
 
         """
         # set the redis constants
