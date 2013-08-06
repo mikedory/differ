@@ -148,15 +148,5 @@ if __name__ == "__main__":
     # print target_content
     # print cached_content
 
-    if target_content is not None:
-        diff = scraper.diff_cache(target_content, cached_content)
-        if diff is not "":
-            print 'There are some differences:'
-            print diff
-        else:
-            print 'The target and cache match.'
-    else:
-        print 'Unable to fetch requested page! D:'
-
     # print(scraper.update_cache(target_content))
-    # print(scraper.update_cache('hi!'))
+    # print(scraper.update_cache(''))
