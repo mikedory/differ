@@ -1,5 +1,7 @@
+# import the usual stuff
 from datetime import timedelta
 
+# import our local stuffs
 import local_settings
 
 
