@@ -6,9 +6,7 @@ from scraper import Scraper
 from celery import Celery
 import offline.celeryconfig
 
-logging.info('Firing up Celery with config file %s...' 
-    % offline.celeryconfig.__name__)
-
+# define our tasks and config module
 celery = Celery('tasks')
 celery.config_from_object('offline.celeryconfig')
 
@@ -23,6 +21,9 @@ def scrape():
     # fire up a scraper object
     scraper = Scraper()
 
+    # debug, if desired
+    logging.debug('Using config file %s' % offline.celeryconfig.__name__)
+
     # define the target to hit
     target_url = local_settings.TARGET_URL
     target_element_name = local_settings.TARGET_ELEMENT_NAME
@@ -35,19 +36,20 @@ def scrape():
         diff = scraper.diff_cache(target_content, cached_content)
         message = ""
         if diff is not "":
-            logging.info('There are some differences...')
+            logging.info('The ')
             logging.info(diff)
             message = diff
 
             logging.info('Updating cache...')
             scraper.update_cache(target_content)
+            logging.info('Cache updated.')
         else:
             logging.info('The target and cache match.')
             logging.info('Leaving cache alone.')
             message = None
     else:
-        logging.info('Unable to fetch requested page! D:')
-        logging.info('Connection falure.')
+        logging.warn('Unable to fetch requested page! D:')
+        logging.error('Scraping falure.')
         message = None
 
     return message
