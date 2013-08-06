@@ -24,7 +24,14 @@ You can run this app in one of two ways: as a stand-alone command (handy to do m
 
 ### Stand-alone
 
+First off, you're doing this in a virtual environment.  You have to be, right?  So make sure you've installed everything properly:
 
+    virtualenv beatwatch-venv --distribute
+    source ./beatwatch/bin/activate
+
+Run the task thusly:
+
+    python site-scraper.py
 
 
 ### Celery
