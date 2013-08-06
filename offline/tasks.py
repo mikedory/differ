@@ -1,6 +1,7 @@
 import logging
 
 from scraper import Scraper
+from cache import Cache
 
 from celery import Celery
 import offline.celeryconfig
@@ -16,22 +17,23 @@ def scrape(target_url, target_element_name):
     Create a task that Celery can run to scrape and update all the things.
 
     """
-
-    # fire up a scraper object
+    # fire up scraper and cache object
     scraper = Scraper()
+    cache = Cache()
 
     # debug, if desired
     logging.debug('Using config file %s' % offline.celeryconfig.__name__)
 
+    # define the target and cached content
     target_content = scraper.fetch_site_content(target_url, target_element_name)
-    cached_content = scraper.fetch_cache()
+    cached_content = cache.fetch_cache()
 
     # check the cache and report our findings
     if target_content is not None:
-        diff = scraper.diff_cache(target_content, cached_content)
+        diff = cache.diff_cache(target_content, cached_content)
         message = ""
         if diff is not "":
-            logging.info('The ')
+            logging.info('The target differs from the cache.')
             logging.info(diff)
             message = diff
 
@@ -39,8 +41,7 @@ def scrape(target_url, target_element_name):
             scraper.update_cache(target_content)
             logging.info('Cache updated.')
         else:
-            logging.info('The target and cache match.')
-            logging.info('Leaving cache alone.')
+            logging.info('The target and cache match. Not altering cache.')
             message = None
     else:
         logging.warn('Unable to fetch requested page! D:')
