@@ -12,20 +12,7 @@ class Scraper:
     Provides methods for scraping target pages and comparing their content
     against cached, earlier versions.
 
-    TODO:   rename this class. and this file, probably.
-
     """
-
-    def __init__(self):
-        """
-        Initalize all our lovely constants and stuff, and create a 
-        db connection object for later use.
-
-        """
-        # set the search parameter constants
-        self.target_url = local_settings.TARGET_URL
-        self.target_element_name = local_settings.TARGET_ELEMENT_NAME
-
 
     def fetch_site_content(self, target_url, target_element_name='html'):
         """
@@ -55,10 +42,9 @@ class Scraper:
 if __name__ == "__main__":
     """
     When run on its own, the scraper will go fetch the target content
-    and print it out for you.
+    and print it out.
 
     """
-
     # initialize the scraper
     scraper = Scraper()
 
@@ -68,4 +54,5 @@ if __name__ == "__main__":
 
     # scrape stuff!
     target_content = scraper.fetch_site_content(target_url, target_element_name)
+
     print target_content
