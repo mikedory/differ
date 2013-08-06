@@ -1,6 +1,7 @@
-# from datetime import timedelta
+from datetime import timedelta
 
 import local_settings
+
 
 """ 
 set up the backend defaults for the results and broker
@@ -18,7 +19,7 @@ BROKER_URL = '%s://%s:%d/%d' % (
     local_settings.BROKER_DB
 )
 
-# CELERY_IMPORTS = ("module.submodule.foo", ) # Module which contains the tasks you want to call asynchronously
+CELERY_IMPORTS = ("offline.tasks", ) # Module which contains the tasks you want to call asynchronously
 
 
 """
@@ -27,12 +28,12 @@ set up the scheduler
 """
 
 
-# CELERYBEAT_SCHEDULE = {
-#     'add-every-30-seconds': {
-#         'task': 'tasks.add',
-#         'schedule': timedelta(seconds=30),
-#         'args': (16, 16)
-#     },
-# }
+CELERYBEAT_SCHEDULE = {
+    'scrape-site': {
+        'task': 'offline.tasks.scrape',
+        'schedule': timedelta(seconds=10),
+        'args': ()
+    },
+}
 
-# CELERY_TIMEZONE = 'UTC'
+CELERY_TIMEZONE = 'UTC'
