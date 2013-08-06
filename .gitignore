@@ -14,8 +14,9 @@ lib
 # redis dumps
 dump*
 
-# virtualenv
+# virtualenvs
 venv
+differ-venv
 
 # local environment files
 .env
