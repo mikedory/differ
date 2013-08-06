@@ -81,6 +81,11 @@ class Cache:
 
 # if we're here to run, run it
 if __name__ == "__main__":
+    """
+    When run on its own, the cache module will go fetch the target content
+    and print it out.
+
+    """
     cache = Cache()
     cached_content = cache.fetch_cache()
     print cached_content
