@@ -51,7 +51,7 @@ CELERYBEAT_SCHEDULE = {
     'scrape-site': {
         'task': 'offline.tasks.scrape',
         'schedule': timedelta(seconds=10),
-        'args': (target_url, target_element_name)
+        'args': (target_url)
     },
 }
 
