@@ -13,7 +13,7 @@ celery.config_from_object('offline.celeryconfig')
 
 
 @celery.task
-def scrape_and(target_url, target_element_name):
+def scrape_and_diff(target_url, target_element_name):
     """
     Create a task that Celery can run to scrape and update all the things.
 
