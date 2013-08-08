@@ -29,15 +29,15 @@ class Email:
         print self.mandrill_client.users.ping()
 
 
-    def send_email(self, text, subject, from_email, to_email, to_name):
+    def send_email(self, html, subject, from_email, to_email, to_name):
         """
-        Send an email 
+        Send an email using Mandrill, and catch/return any exceptions.
 
         """
 
         # roll up the message object
         message = {
-            'text': text,
+            'html': html,
             'subject': subject,
             'from_email': from_email,
             'to': [
