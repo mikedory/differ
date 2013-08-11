@@ -1,6 +1,3 @@
-# import the usual stuff
-from datetime import timedelta
-
 # import our local stuffs
 import local_settings
 
@@ -50,7 +47,7 @@ target_element_name = local_settings.TARGET_ELEMENT_NAME
 CELERYBEAT_SCHEDULE = {
     'scrape-site': {
         'task': 'offline.tasks.scrape_and_diff',
-        'schedule': timedelta(seconds=10),
+        'schedule': local_settings.SCRAPER_FREQUENCY,
         'args': (target_url, target_element_name)
     },
 }

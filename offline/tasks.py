@@ -24,8 +24,8 @@ def scrape_and_diff(target_url, target_element_name):
 
     # fire up app, and run the scraper
     app = App()
-    task_result = app.run_scraper(target_url, target_element_name)
+    task_message, task_diff = app.run_scraper(target_url, target_element_name)
 
     logging.debug('task complete!')
 
-    return task_result
+    return task_message
