@@ -67,10 +67,7 @@ class App:
 if __name__ == '__main__':
     app = App()
 
-    # define the target to hit
-    target_url = local_settings.TARGET_URL
-    target_element_name = local_settings.TARGET_ELEMENT_NAME
-
     # run scraper!
-    scrape_result = app.run_scraper(target_url, target_element_name)
-    print scrape_result
+    for target_url, target_element in local_settings.TARGET_URLS:
+        scrape_result = app.run_scraper(target_url, target_element)
+        print scrape_result
