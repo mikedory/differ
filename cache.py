@@ -26,14 +26,14 @@ class Cache:
         db = database.Database()
         self.db = db.get_redis_conn()
 
-    def fetch_cache(self):
+    def fetch_cache(self, target_url):
         """
         Fetches the latest entry from the Redis cache
 
         """
 
         # greab the last-saved content out of the cache
-        cached_content = self.db.hget('target_page_cache', 'page_content')
+        cached_content = self.db.hget(target_url, 'page_content')
 
         return cached_content
 
@@ -61,7 +61,7 @@ class Cache:
 
         return diff_string
 
-    def update_cache(self, target_content):
+    def update_cache(self, target_url, target_content):
         """
         Update the page content stored in the cache.
 
@@ -71,6 +71,6 @@ class Cache:
             "page_content": target_content,
             "timestamp": unix_timestamp
         }
-        cache_update = self.db.hmset('target_page_cache', cache_dict)
+        cache_update = self.db.hmset(target_url, cache_dict)
 
         return cache_update

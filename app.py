@@ -25,7 +25,7 @@ class App:
             target_url,
             target_element_name
         )
-        cached_content = cache.fetch_cache()
+        cached_content = cache.fetch_cache(target_url)
 
         # check the cache and report our findings
         if target_content is not None:
@@ -35,7 +35,7 @@ class App:
                 logging.info(diff)
 
                 logging.info('Updating cache...')
-                cache.update_cache(target_content)
+                cache.update_cache(target_url, target_content)
                 logging.info('Cache updated.')
                 message = 'Success! Cache updated.'
             else:

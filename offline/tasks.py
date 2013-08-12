@@ -13,7 +13,7 @@ celery.config_from_object('offline.celeryconfig')
 
 
 @celery.task
-def scrape_and_diff(target_url, target_element_name):
+def scrape_and_diff(target_urls):
     """
     Create a task that Celery can run to scrape and update all the things.
 
@@ -24,7 +24,9 @@ def scrape_and_diff(target_url, target_element_name):
 
     # fire up app, and run the scraper
     app = App()
-    task_message, task_diff = app.run_scraper(target_url, target_element_name)
+    task_message = ""
+    for target_url, target_element in target_urls:
+        task_message += app.run_scraper(target_url, target_element)
 
     logging.debug('task complete!')
 
