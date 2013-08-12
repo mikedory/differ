@@ -1,0 +1,24 @@
+# import the usual stuffs
+from datetime import timedelta
+
+SCRAPER_TARGET = [
+    ('http://www.tornadoweb.org/en/stable/releases.html', 'html'),
+]
+
+CELERY_RESULT_BACKEND = 'redis'
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+
+BROKER_BACKEND = 'redis'
+BROKER_HOST = 'localhost'
+BROKER_PORT = 6379
+BROKER_DB = 0
+
+SCRAPER_FREQUENCY = timedelta(seconds=10) # can be minutes, hours, etc.
+
+MANDRILL_API_KEY = ''
+
+EMAIL_FROM_ADDRESS = ''
+EMAIL_TO_ADDRESS = ''
+EMAIL_TO_NAME = ''
