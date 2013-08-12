@@ -1,7 +1,7 @@
 # import the usual stuffs
 from datetime import timedelta
 
-SCRAPER_TARGET = [
+TARGET_URLS = [
     ('http://www.tornadoweb.org/en/stable/releases.html', 'html'),
 ]
 
