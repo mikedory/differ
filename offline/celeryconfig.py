@@ -40,8 +40,7 @@ Rather than running workers and the `beat` task, run a single worker in beat mod
 """
 
 # define the target to hit
-target_url = local_settings.TARGET_URL
-target_element_name = local_settings.TARGET_ELEMENT_NAME
+target_urls = local_settings.TARGET_URLS
 
 # schedulize it
 CELERYBEAT_SCHEDULE = {
