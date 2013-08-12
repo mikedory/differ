@@ -24,9 +24,11 @@ def scrape_and_diff(target_urls):
 
     # fire up app, and run the scraper
     app = App()
-    task_message = ""
+    task_message = []
     for target_url, target_element in target_urls:
-        task_message += app.run_scraper(target_url, target_element)
+        task_message.append(
+            app.run_scraper(target_url, target_element)
+        )
 
     logging.debug('task complete!')
 
