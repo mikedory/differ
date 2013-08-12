@@ -2,7 +2,7 @@
 import local_settings
 
 
-""" 
+"""
 Set up the backend defaults for the results and broker
 (based heavily on: https://gist.github.com/vivekn/1062526)
 
@@ -17,7 +17,7 @@ BROKER_URL = '%s://%s:%d/%d' % (
     local_settings.BROKER_DB
 )
 
-CELERY_IMPORTS = ("offline.tasks", ) # Module which contains the tasks you want to call asynchronously
+CELERY_IMPORTS = ("offline.tasks", )  # Module which contains the tasks you want to call asynchronously
 
 
 """
@@ -47,7 +47,7 @@ CELERYBEAT_SCHEDULE = {
     'scrape-site': {
         'task': 'offline.tasks.scrape_and_diff',
         'schedule': local_settings.SCRAPER_FREQUENCY,
-        'args': (target_url, target_element_name)
+        'args': (target_urls)
     },
 }
 
