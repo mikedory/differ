@@ -9,7 +9,7 @@ import local_settings
 class Database:
     def __init__(self):
         """
-        Initalize all our lovely constants and stuff, and create a 
+        Initalize all our lovely constants and stuff, and create a
         db connection object for later use.
 
         TODO:   move all this stuff to elsewhere: we don't want to need
@@ -20,7 +20,6 @@ class Database:
         self.redis_host = local_settings.REDIS_HOST
         self.redis_port = local_settings.REDIS_PORT
         self.redis_db = local_settings.REDIS_DB
-
 
     def get_redis_conn(self):
         """

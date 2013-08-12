@@ -18,8 +18,8 @@ class Scraper:
         """
         Fetches the content of the requested site, based on element types.
         It uses CSS selectors (jQuery-style), and defaults to `html`
-        if not otherwise explicitly set. 
-        
+        if not otherwise explicitly set.
+
         """
         # snag the page content
         try:

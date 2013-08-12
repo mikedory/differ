@@ -46,19 +46,17 @@ class App:
             logging.error('Scraping falure.')
             message = 'Failure!'
 
-
         logging.info('Scraper finished.')
 
         return message, diff
-
 
     def send_email(self, message):
         email = Email()
 
         message = {
-            'html':'hi!',
-            'subject':'oh',
-            'from_email':'lists@dory.me', 
+            'html': 'hi!',
+            'subject': 'oh',
+            'from_email': 'lists@dory.me',
             'to': [
                 {'email': 'michael.dory@gmail.com', 'name': 'Mike Dory'}
             ],

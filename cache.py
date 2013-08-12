@@ -7,7 +7,7 @@ from datetime import datetime
 import database
 
 
-# the cache class. 
+# the cache class.
 class Cache:
     """
     Provides methods for fetching cached content and comparing its content
@@ -17,7 +17,7 @@ class Cache:
 
     def __init__(self):
         """
-        Initalize all our lovely constants and stuff, and create a 
+        Initalize all our lovely constants and stuff, and create a
         db connection object for later use.
 
         """
@@ -25,7 +25,6 @@ class Cache:
         # create the Redis connection object
         db = database.Database()
         self.db = db.get_redis_conn()
-
 
     def fetch_cache(self):
         """
@@ -37,7 +36,6 @@ class Cache:
         cached_content = self.db.hget('target_page_cache', 'page_content')
 
         return cached_content
-
 
     def diff_cache(self, target_content, cached_content):
         """
@@ -54,7 +52,7 @@ class Cache:
             )
 
             # the output is a generator, so let's step through it to make
-            # a string we can use later 
+            # a string we can use later
             diff_string = ""
             for line in diff:
                 diff_string += line
@@ -62,7 +60,6 @@ class Cache:
             diff_string = None
 
         return diff_string
-
 
     def update_cache(self, target_content):
         """
@@ -74,7 +71,6 @@ class Cache:
             "page_content": target_content,
             "timestamp": unix_timestamp
         }
-        cache_update = self.db.hmset('target_page_cache', cache_dict) 
+        cache_update = self.db.hmset('target_page_cache', cache_dict)
 
         return cache_update
-
