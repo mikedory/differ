@@ -21,10 +21,8 @@ class Cache:
         db connection object for later use.
 
         """
-
-        # create the Redis connection object
-        db = database.Database()
-        self.db = db.get_redis_conn()
+        # initialize the database object
+        self.db = database.Database()
 
     def fetch_cache(self, target_url):
         """
@@ -33,7 +31,7 @@ class Cache:
         """
 
         # greab the last-saved content out of the cache
-        cached_content = self.db.hget('target_page_cache'+target_url, 'page_content')
+        cached_content = self.db.get('target_page_cache'+target_url, 'page_content')
 
         # convert the result to unicode, if there is any
         if cached_content is not None:
@@ -75,6 +73,6 @@ class Cache:
             "page_content": target_content,
             "timestamp": unix_timestamp
         }
-        cache_update = self.db.hmset('target_page_cache'+target_url, cache_dict)
+        cache_update = self.db.set('target_page_cache'+target_url, cache_dict)
 
         return cache_update
