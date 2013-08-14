@@ -57,13 +57,13 @@ class Cache:
 
             # the output is a generator, so let's step through it to make
             # a string we can use later
-            diff_string = ""
+            diff_result = u''
             for line in diff:
-                diff_string += line
+                diff_result += line
         else:
-            diff_string = None
+            diff_result = None
 
-        return diff_string
+        return diff_result
 
     def update_cache(self, target_url, target_content):
         """
