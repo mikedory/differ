@@ -47,7 +47,7 @@ CELERYBEAT_SCHEDULE = {
     'scrape-site': {
         'task': 'offline.tasks.scrape_and_diff',
         'schedule': local_settings.SCRAPER_FREQUENCY,
-        'args': (target_urls)
+        'args': (target_urls,)
     },
 }
 
