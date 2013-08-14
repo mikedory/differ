@@ -10,14 +10,12 @@ class Email:
     Methods for sending user emails and interacting with the Mandrill API.
 
     """
-
     def __init__(self):
         """
         Initialize the Mandrill connection.
 
         """
-        self.mandrill_client = mandrill.Mandrill(local_settings.MANDRILL_API_KEY) 
-
+        self.mandrill_client = mandrill.Mandrill(local_settings.MANDRILL_API_KEY)
 
     def send_ping(self):
         """
@@ -27,7 +25,6 @@ class Email:
         """
 
         print(self.mandrill_client.users.ping())
-
 
     def send_email(self, html, subject, from_email, to_email, to_name):
         """
