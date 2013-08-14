@@ -33,7 +33,7 @@ class Cache:
         """
 
         # greab the last-saved content out of the cache
-        cached_content = self.db.hget(target_url, 'page_content')
+        cached_content = self.db.hget('target_page_cache'+target_url, 'page_content')
 
         return cached_content
 
@@ -71,6 +71,6 @@ class Cache:
             "page_content": target_content,
             "timestamp": unix_timestamp
         }
-        cache_update = self.db.hmset(target_url, cache_dict)
+        cache_update = self.db.hmset('target_page_cache'+target_url, cache_dict)
 
         return cache_update
