@@ -1,5 +1,5 @@
 # import the mandrill library
-import mandrill 
+import mandrill
 
 # import our local settings
 import local_settings
