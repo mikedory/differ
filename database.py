@@ -22,17 +22,22 @@ class Database:
         self.redis_db = local_settings.REDIS_DB
 
         # connect to Redis
-        self.db = self.get_redis_conn()
+        self.db = self.get_redis_conn(
+            self.redis_host,
+            self.redis_port,
+            self.redis_db
+        )
 
-    def get_redis_conn(self):
+    def get_redis_conn(self, redis_host, redis_port, redis_db):
         """
         Gets a connection to Redis, and returns the connection object.
 
         """
         redis_conn = redis.Redis(
-            host=self.redis_host,
-            port=self.redis_port,
-            db=self.redis_db)
+            host=redis_host,
+            port=redis_port,
+            db=redis_db
+        )
 
         return redis_conn
 
