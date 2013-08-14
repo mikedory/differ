@@ -29,10 +29,10 @@ class Scraper:
 
             # find all the divs matching the requested selectors
             target_html = soup.select(target_element_name)
-            target_content = target_html[0].prettify(formatter="minimal")
+            target_content = target_html[0].prettify(formatter=None)
 
-            # converting to ascii before storing, or else Redis will do it for us,
-            # and then the cache will look different every time =/
+            # converting to ascii before storing, because Redis hates unicode,
+            # and then the cache will look different every time when diffed =/
             target_content = target_content.encode('ascii', 'ignore')
 
         # if the request fails, return None
