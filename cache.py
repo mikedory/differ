@@ -35,6 +35,10 @@ class Cache:
         # greab the last-saved content out of the cache
         cached_content = self.db.hget('target_page_cache'+target_url, 'page_content')
 
+        # convert the result to unicode, if there is any
+        if cached_content is not None:
+            cached_content = unicode(cached_content, errors='ignore')
+
         return cached_content
 
     def diff_cache(self, target_content, cached_content):
@@ -55,10 +59,7 @@ class Cache:
             # a string we can use later
             diff_string = ""
             for line in diff:
-                # diff_string += line
-                diff_string.join("",line)
-                print line
-                print diff_string
+                diff_string += line
         else:
             diff_string = None
 
