@@ -55,7 +55,10 @@ class Cache:
             # a string we can use later
             diff_string = ""
             for line in diff:
-                diff_string += line
+                # diff_string += line
+                diff_string.join("",line)
+                print line
+                print diff_string
         else:
             diff_string = None
 

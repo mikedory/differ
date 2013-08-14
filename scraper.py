@@ -55,4 +55,4 @@ if __name__ == "__main__":
     # scrape stuff!
     target_content = scraper.fetch_site_content(target_url, target_element_name)
 
-    print target_content
+    print(target_content)

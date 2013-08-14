@@ -70,4 +70,4 @@ if __name__ == '__main__':
     # run scraper!
     for target_url, target_element in local_settings.TARGET_URLS:
         scrape_result = app.run_scraper(target_url, target_element)
-        print scrape_result
+        print(scrape_result)

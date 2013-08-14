@@ -26,7 +26,7 @@ class Email:
 
         """
 
-        print self.mandrill_client.users.ping()
+        print(self.mandrill_client.users.ping())
 
 
     def send_email(self, html, subject, from_email, to_email, to_name):
