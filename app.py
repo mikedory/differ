@@ -30,7 +30,7 @@ class App:
         # check the cache and report our findings
         if target_content is not None:
             diff = cache.diff_cache(target_content, cached_content)
-            if diff is not "":
+            if diff is not u'':
                 logging.info('The target differs from the cache.')
                 logging.info(diff)
 
@@ -69,5 +69,6 @@ if __name__ == '__main__':
 
     # run scraper!
     for target_url, target_element in local_settings.TARGET_URLS:
-        scrape_result = app.run_scraper(target_url, target_element)
+        scrape_result, diff = app.run_scraper(target_url, target_element)
         print(scrape_result)
+        print(diff)
