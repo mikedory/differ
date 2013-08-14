@@ -42,9 +42,17 @@ class Database:
         return redis_conn
 
     def get(self, set_name, set_content):
+        """
+        Fetch the requested data from the database by set name and content
+
+        """
         result = self.db.hget(set_name, set_content)
         return result
 
     def set(self, set_name, set_content):
+        """
+        Update the requested data from the database by set name and content
+
+        """
         result = self.db.hmset(set_name, set_content)
         return result
