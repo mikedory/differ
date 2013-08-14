@@ -16,10 +16,13 @@ class Database:
                 the local_settings files just to load this module, maybe?
 
         """
-        # set the redis constants
+        # set the Redis constants
         self.redis_host = local_settings.REDIS_HOST
         self.redis_port = local_settings.REDIS_PORT
         self.redis_db = local_settings.REDIS_DB
+
+        # connect to Redis
+        self.db = self.get_redis_conn()
 
     def get_redis_conn(self):
         """
@@ -32,3 +35,11 @@ class Database:
             db=self.redis_db)
 
         return redis_conn
+
+    def get(self, set_name, set_content):
+        result = self.db.hget(set_name, set_content)
+        return result
+
+    def set(self, set_name, set_content):
+        result = self.db.hmset(set_name, set_content)
+        return result
