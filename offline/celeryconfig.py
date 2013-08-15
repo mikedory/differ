@@ -1,5 +1,5 @@
 # import our local stuffs
-import local_settings
+import config.local_settings as local_settings
 
 
 """
