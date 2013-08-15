@@ -23,8 +23,14 @@ class Email:
         Returns a "PONG!" when successful.
 
         """
+        try:
+            # try to send a ping to Mandrill
+            result = self.mandrill_client.users.ping()
+        except Exception as exception:
+            # catch and return the exception
+            result = exception
 
-        print(self.mandrill_client.users.ping())
+        return result
 
     def send_email(self, html, subject, from_email, to_email, to_name):
         """
@@ -56,3 +62,8 @@ class Email:
             result = exception
 
         return result
+
+
+if __name__ == '__main__':
+    e = Email()
+    print(e.send_ping())
