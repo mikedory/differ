@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # import our local stuffs
-import local_settings
+import config.local_settings as local_settings
 
 
 # the scraper class. the brains of the organization, really.

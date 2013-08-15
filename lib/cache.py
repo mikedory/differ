@@ -4,7 +4,7 @@ import difflib
 from datetime import datetime
 
 # import our local stuffs
-import database
+from lib.database import Database
 
 
 # the cache class.
@@ -22,7 +22,7 @@ class Cache:
 
         """
         # initialize the database object
-        self.db = database.Database()
+        self.db = Database()
 
     def fetch_cache(self, target_url):
         """
