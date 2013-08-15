@@ -1,8 +1,4 @@
 # python things
-bin
-build
-include
-lib
 *.pyc
 
 # mac things
