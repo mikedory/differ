@@ -4,9 +4,10 @@ import logging
 # TODO: move the local settings stuff to here.
 import local_settings
 
-import scraper as Scraper
-import cache as Cache
-import email
+# import our modules
+from scraper import Scraper
+from cache import Cache
+from email import Email
 
 
 class App:
@@ -17,8 +18,8 @@ class App:
         """
 
         # fire up scraper and cache object
-        scraper = Scraper.Scraper()
-        cache = Cache.Cache()
+        scraper = Scraper()
+        cache = Cache()
 
         # define the target and cached content
         target_content = scraper.fetch_site_content(
@@ -50,18 +51,20 @@ class App:
 
         return message, diff
 
-    # def send_email(self, diff):
-    #     email = Email()
+    def send_email(self, diff):
+        email = Email()
 
-    #     email_attempt = email.send_email(
-    #         html,
-    #         subject,
-    #         from_email,
-    #         to_email,
-    #         to_name
-    #     )
+        html = '<h1>'
 
-    #     return email_attempt
+        email_attempt = email.send_email(
+            html,
+            subject,
+            from_email,
+            to_email,
+            to_name
+        )
+
+        return email_attempt
 
 if __name__ == '__main__':
     app = App()
