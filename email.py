@@ -65,5 +65,6 @@ class Email:
 
 
 if __name__ == '__main__':
+    # if run directly, try pinging Mandrill for funsies
     e = Email()
     print(e.send_ping())

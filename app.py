@@ -67,6 +67,7 @@ class App:
         return email_attempt
 
 if __name__ == '__main__':
+    # if run directly, try running the scraper and printing the results
     app = App()
 
     # run scraper!
