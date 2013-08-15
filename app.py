@@ -1,5 +1,6 @@
 # import our favorite libraries
 import logging
+import cgi
 
 # TODO: move the local settings stuff to here.
 import local_settings
@@ -17,7 +18,7 @@ class App:
 
         """
 
-        # fire up scraper and cache object
+        # fire up scraper and cache objects
         scraper = Scraper()
         cache = Cache()
 
@@ -38,6 +39,11 @@ class App:
                 logging.info('Updating cache...')
                 cache.update_cache(target_url, target_content)
                 logging.info('Cache updated.')
+
+                logging.info('Sending mail...')
+                email_result = self.send_email(target_url, diff)
+                logging.info(email_result)
+
                 message = 'Success! Cache updated.'
             else:
                 logging.info('The target and cache match. Not altering cache.')
@@ -51,10 +57,17 @@ class App:
 
         return message, diff
 
-    def send_email(self, diff):
+    def send_email(self, target_url, diff):
         email = Email()
 
-        html = '<h1>'
+        # escape HTML characters in the diff
+        diff = cgi.escape(diff)
+
+        subject = 'Content update for %s' % target_url
+        html = '<h1>Content update for %s</h1><pre>%s</pre>' % (target_url, diff)
+        from_email = local_settings.EMAIL_FROM_ADDRESS
+        to_email = local_settings.EMAIL_TO_ADDRESS
+        to_name = local_settings.EMAIL_TO_NAME
 
         email_attempt = email.send_email(
             html,
