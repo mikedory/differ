@@ -1,24 +1,32 @@
 # import the usual stuffs
 from datetime import timedelta
 
+# URLS to scrape, and HTML elements to target
+# (put in 'html' to scrape a full page)
 TARGET_URLS = [
-    ('http://www.tornadoweb.org/en/stable/releases.html', 'html'),
+    ('http://website.com', 'html'),
 ]
 
+# celery's results settings
 CELERY_RESULT_BACKEND = 'redis'
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 0
 
+# celery's broker settings
 BROKER_BACKEND = 'redis'
 BROKER_HOST = 'localhost'
 BROKER_PORT = 6379
 BROKER_DB = 0
 
-SCRAPER_FREQUENCY = timedelta(seconds=10) # can be minutes, hours, etc.
+# how often to run the scraper
+# (can be minutes, hours, etc.)
+SCRAPER_FREQUENCY = timedelta(seconds=10)
 
+# API key provided by Mandrill when you sign up
 MANDRILL_API_KEY = ''
 
+# details about who to send emails from and to
 EMAIL_FROM_ADDRESS = ''
 EMAIL_TO_ADDRESS = ''
 EMAIL_TO_NAME = ''
