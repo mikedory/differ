@@ -3,12 +3,12 @@ import logging
 import cgi
 
 # TODO: move the local settings stuff to here.
-import local_settings
+import config.local_settings as local_settings
 
 # import our modules
-from scraper import Scraper
-from cache import Cache
-from email import Email
+from lib.scraper import Scraper
+from lib.cache import Cache
+from lib.email import Email
 
 
 class App:
