@@ -1,9 +1,7 @@
 Differ
 ======
 
-Differ is a 
-
-Check a web page for a specific element, and run a diff on it.  If it's changed from the last check, send an email with the diff!
+Differ is a Python-based tool that will check specified web pages at specified intervals, and email the user the differences between checks (if any are found).
 
 
 Requirements
@@ -16,24 +14,30 @@ Requirements
 - Beautiful Soup
 - Supervisor
 
-You'll need a place to host this, a Mandrill account, and a webpage (or any HTML document) that you want to monitor.
+You'll also need a place to host this (and/or a Heroku account), a Mandrill account, and a webpage (or any HTML document) that you want to monitor.
 
 
 Usage
 -----
 
-You can run this app in one of two ways: as a stand-alone command (handy to do manual site diffs or join up with a Cron task or Herou's Scheduler), or as a running process via Celery.
+You can run this app in one of two ways: as a stand-alone command (handy to do manual site diffs or join up with a Cron task or Herou's Scheduler), or as a scheduled process via Celery.
 
 ### Stand-alone
 
-First off, you're doing this in a virtual environment.  You have to be, right?  So make sure you've installed everything properly:
+First off, you're doing this in a virtual environment, right?  So make sure you've set that up properly:
 
     virtualenv differ-venv --distribute
-    source ./differ/bin/activate
+    source ./differ-venv/bin/activate
 
-Run the task thusly:
+Then install your dependancies:
 
-    python site-scraper.py
+    pip install -r requirements.txt
+
+Run the full task thusly:
+
+    python app.py
+
+The output from this task will go to stdout, and if an email is specified, the differences will be emailed!
 
 
 ### Celery
@@ -61,7 +65,9 @@ Rather than running workers and the `beat` task, run a single worker in beat mod
 TODO
 ----
 
-Err, make this work.
+- Better document email functionality.
+- Create example using MongoDB (or Postgres) in addition to Redis.
+- Add a web panel for adding further scraping targets.
 
 
 Changelog
@@ -70,7 +76,7 @@ Changelog
 First release! Woot!
 
 
-License
--------
+About
+-----
 
-Basically, totally open.  Go to town.
+This project was developed by [Mike Dory](https://github.com/mikedory).  Pull requests are welcome, as are bugs, feature requests, and general suggestions, so fire away. =)
