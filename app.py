@@ -11,6 +11,7 @@ from lib.cache import Cache
 from lib.email import Email
 
 
+# this is the main stuff-happens-here class
 class App:
     def run_scraper(self, target_url, target_element_name):
         """
@@ -87,7 +88,10 @@ class App:
 
 
 if __name__ == '__main__':
-    # if run directly, try running the scraper and printing the results
+    """
+    if run directly, try running the scraper and printing the results
+
+    """
     app = App()
 
     # run scraper!
