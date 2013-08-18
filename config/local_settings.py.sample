@@ -27,6 +27,9 @@ SCRAPER_FREQUENCY = timedelta(seconds=10)
 MANDRILL_API_KEY = ''
 
 # details about who to send emails from and to
+# NOTE:
+#   if any of these fields are left blank,
+#   emails will not be sent!
 EMAIL_FROM_ADDRESS = ''
 EMAIL_TO_ADDRESS = ''
 EMAIL_TO_NAME = ''

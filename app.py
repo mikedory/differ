@@ -58,19 +58,23 @@ class App:
         return message, diff
 
     def send_email(self, target_url, diff):
+        # initialize the email object
         email = Email()
 
-        if local_settings.EMAIL_TO_ADDRESS is not '':
+        # define the strings to go in the email
+        subject = 'Content update for %s' % target_url
+        html = '<h1>Content update for %s</h1><pre>%s</pre>' % (target_url, diff)
+        from_email = local_settings.EMAIL_FROM_ADDRESS
+        to_email = local_settings.EMAIL_TO_ADDRESS
+        to_name = local_settings.EMAIL_TO_NAME
+
+        # only send the email if all the required fields are filled out
+        if all(email_config is not '' for email_config in (from_email, to_email, to_name)):
 
             # escape HTML characters in the diff
             diff = cgi.escape(diff)
 
-            subject = 'Content update for %s' % target_url
-            html = '<h1>Content update for %s</h1><pre>%s</pre>' % (target_url, diff)
-            from_email = local_settings.EMAIL_FROM_ADDRESS
-            to_email = local_settings.EMAIL_TO_ADDRESS
-            to_name = local_settings.EMAIL_TO_NAME
-
+            # attempt to send an email
             email_attempt = email.send_email(
                 html,
                 subject,
@@ -80,6 +84,7 @@ class App:
             )
 
             return email_attempt
+
 
 if __name__ == '__main__':
     # if run directly, try running the scraper and printing the results
